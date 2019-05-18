@@ -1,0 +1,13 @@
+{
+  "$schema": "../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "plat-aliases": {
+      "description": "A schematics that will create aliases for your project apps.",
+      "factory": "./plat-aliases/index#platAliases"
+    },
+    "plat-structure": {
+      "description": "A schematics that helps you structure your app.",
+      "factory": "./plat-structure/index#platStructure"
+    }
+  }
+}
