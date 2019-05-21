@@ -13,6 +13,7 @@ export function platAliases(_options: any): Rule {
   return chain([
     // chains and generates the generate-files schematic
     // we want to pass it as a schematic and its options, so we can validate them!
+    // this way, we only have to call one schematics!
     schematic(`plat-structure`, _options),
     (tree: Tree, _context: SchematicContext) => {
       _context.logger.info(JSON.stringify(_options) + ' options to generate the project aliases');
