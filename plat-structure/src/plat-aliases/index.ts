@@ -20,17 +20,21 @@ export function platAliases(_options: any): Rule {
       // we need to use this to get the path to the right app in projects
 
       const alias = dasherize(_options.name);
-      const dir = `/projects/${alias}/`;
+      const dir = '/';
 
       _context.logger.info(dir + ' directory path in question');
       // make some verifications before moving on
       // should get dir for app
       tree.getDir(dir).visit(filePath => {
-        // make sure we're inside of an app
-        if (!filePath.endsWith('tsconfig.app.json')) {
+        // prevent iteration inside of node_modules
+        if (filePath.includes('node_modules')) {
           return;
         }
-  
+        // make sure we're inside of an app
+        if (!filePath.endsWith('tsconfig.json')) {
+          return;
+        }
+        _context.logger.info('Am I in the right config file? ' + filePath);
         const tsConfigBuffer = tree.read(filePath);
         if (!tsConfigBuffer) {
           _context.logger.info('Sorry! No file path');
@@ -42,7 +46,7 @@ export function platAliases(_options: any): Rule {
         // cash both the paths property as object
         const paths = { ...rawTsConfig['compilerOptions']['paths'] };
 
-        paths[`@${alias}/*`] = [`/src/*`, `/src/app/*`];
+        paths[`@${alias}/*`] = [`projects/src/*`, `projects/src/app/*`];
         
         // actually modify the file
         const decoratedAppTsConfigJSON = {
