@@ -20,7 +20,6 @@ You're set! Now you can exectute it from an Angular project, by linking it to th
 
 ```bash
 npm link plat-structure
-ng generate plat-structure:plat-aliases --name=[name-of-your-project] --path=projects/[path-to-your-project]/src/app --dry-run=false
+ng generate plat-structure:plat-aliases --name=[name-of-your-project] --path=projects/[path-to-your-project]/src/app 
 ```
 
-WARNING: only use the --dry-run=false flag when actually want to write in your file system!
